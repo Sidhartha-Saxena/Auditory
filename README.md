@@ -18,6 +18,7 @@ You can also see **popular artists** and **new popular songs**.
 
 # Responsive Design
 
+![Responsive Design](https://github.com/Sidhartha-Saxena/Auditory/blob/master/responsive.jpg?raw=true "Responsive Design")
 
 # You check out new popular songs around your location, top artists, and top charts.
 

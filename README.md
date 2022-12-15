@@ -16,6 +16,9 @@ You can also see **popular artists** and **new popular songs**.
 
 ![Search Page](https://github.com/Sidhartha-Saxena/Auditory/blob/master/searchpage.jpg?raw=true "Search Page")
 
+# Responsive Design
+
+
 # You check out new popular songs around your location, top artists, and top charts.
 
 ![Around You Page](https://github.com/Sidhartha-Saxena/Auditory/blob/master/aroundyoupage.jpg?raw=true "Around You Page")
@@ -34,3 +37,4 @@ You can also see **popular artists** and **new popular songs**.
 # Check out artists and their popular songs and albums.
 
 ![Artist Details](https://github.com/Sidhartha-Saxena/Auditory/blob/master/artistdetailpage.jpg?raw=true "Artist detail")  
+

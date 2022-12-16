@@ -2,7 +2,7 @@
 ### This app lets you discover new song **genres** and new **songs**
 Built using **React-18**,**TailWind CSS**,**Redux**,*Styled-components*,*Shazam-core*
 
-## [Auditory Link]('https://auditory.netlify.app/' "Link to App")
+## [Auditory Link](https://auditory.netlify.app/ "Link to App")
 
 ***
 ## Home Page

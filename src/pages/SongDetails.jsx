@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
@@ -34,12 +34,18 @@ export default function SongDetails() {
     dispatch(setActiveSong({ song, data, i }));
     dispatch(playPause(true));
   };
+  const divWidth = useRef();
+  useEffect(() => {
+    if (!isFetchingSongDetails && !isFetchingSongRelated && !error) {
+      divWidth.current.scrollIntoView();
+    }
+  });
   // const songData=null
   if (isFetchingSongDetails || isFetchingSongRelated) return <Loader />;
   if (error) return <Error />;
 
   return (
-    <div className="h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
+    <div className="h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse" ref={divWidth}>
       <div className="flex-1 h-fit ">
         <div className="flex flex-col">
           <DetailsHeader
@@ -60,7 +66,6 @@ export default function SongDetails() {
                 ))
               ) : (
                 <div className="flex flex-col items-center justify-between">
-                  
                   <FiFrown size={50} className="text-gray-200" />
                   <p className="text-gray-200 text-base my-1">
                     Sorry, No lyrics found!

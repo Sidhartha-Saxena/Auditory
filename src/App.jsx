@@ -1,11 +1,22 @@
-import { useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { useEffect } from "react";
+import { useRef } from "react";
+import { useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 
-import { Searchbar, Sidebar, MusicPlayer, RelatedSongs } from './components';
-import { ArtistDetails, TopArtists, AroundYou, Discover, Search, SongDetails, TopCharts } from './pages';
+import { Searchbar, Sidebar, MusicPlayer } from "./components";
+import {
+  ArtistDetails,
+  TopArtists,
+  AroundYou,
+  Discover,
+  Search,
+  SongDetails,
+  TopCharts,
+} from "./pages";
 
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
+
 
   return (
     <div className="relative flex">
@@ -13,7 +24,9 @@ const App = () => {
       <div className=" flex flex-col bg-[#000]">
         <Searchbar />
 
-        <div className="px-3 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse lg:w-[calc(100vw-240px)]" >
+        <div
+          className="px-3 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse lg:w-[calc(100vw-240px)]"
+        >
           <div className="flex-1 h-fit ">
             <Routes>
               <Route path="/" element={<Discover />} />
@@ -25,7 +38,6 @@ const App = () => {
               <Route path="/search/:searchTerm" element={<Search />} />
             </Routes>
           </div>
-
         </div>
       </div>
 

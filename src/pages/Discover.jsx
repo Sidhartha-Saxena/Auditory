@@ -28,10 +28,14 @@ export default function Discover() {
   };
   useEffect(() => {
     window.addEventListener("resize", handle);
+    if (!isFetching && !error) {
+      divWidth.current.scrollIntoView();
+    }
+
     return () => {
       window.removeEventListener("resize", handle);
     };
-  }, []);
+  });
 
   if (isFetching) {
     return <Loader />;
@@ -40,14 +44,14 @@ export default function Discover() {
     return <Error />;
   }
   return (
-    <div
-      className="h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex lg:flex-row flex-col"
-      ref={divWidth}
-    >
+    <div className="h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex lg:flex-row flex-col">
       <div className="flex-1 h-fit mb-8">
         <div className="flex flex-col items-center">
           <div className="w-full flex justify-between items-center sm:flex-row flex-col mt-4 mb-10">
-            <h2 className="font-bold text-3xl text-white text-left">
+            <h2
+              className="font-bold text-3xl text-white text-left"
+              ref={divWidth}
+            >
               Discover
             </h2>
             <select

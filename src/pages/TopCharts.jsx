@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Error, Loader, SongCard,SongBar } from "../components";
 import { useGetTopChartsQuery } from "../redux/services/shazamCore";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
+import { useRef } from "react";
 
 export default function TopCharts() {
 
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data, isFetching, error } = useGetTopChartsQuery();
   const dispatch = useDispatch();
+  const divWidth = useRef();
+  useEffect(() => {
+    if(!isFetching && !error) {divWidth.current.scrollIntoView();}
+  });
+  
   if (isFetching ) {
     return <Loader />;
   }
@@ -23,8 +29,8 @@ export default function TopCharts() {
     dispatch(playPause(true));
   };
   return (
-    <div className="flex flex-col">
-      <h2 className="font-bold text-white text-3xl mt-4 mb-10">Top Charts</h2>
+    <div className="flex flex-col" >
+      <h2 className="font-bold text-white text-3xl mt-4 mb-10" ref={divWidth} >Top Charts</h2>
       <div className="sm:hidden md:hidden xs:hidden lg:flex flex-wrap sm:justify-start justify-center gap-8 ">
         {data?.map((song, i) => (
           <SongCard
@@ -37,7 +43,7 @@ export default function TopCharts() {
           />  
         ))}
       </div>
-      <div className="lg:hidden xl:hidden 2xl:hidden flex flex-wrap sm:justify-start justify-center gap-8 ">
+      <div className="lg:hidden xl:hidden 2xl:hidden flex flex-wrap sm:justify-start justify-center gap-8 " >
       {data?.map((song, i) => (
           <SongBar
             key={`${song.key}`}

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Error, Loader, SongCard ,SongBar} from "../components";
 import { useGetSongsByCountryQuery } from "../redux/services/shazamCore";
 import { playPause, setActiveSong } from "../redux/features/playerSlice";
+import { useRef } from "react";
 
 export default function AroundYou() {
   const [country, setCountry] = useState("");
@@ -13,6 +14,10 @@ export default function AroundYou() {
   const dispatch = useDispatch();
   const { data, isFetching, error } = useGetSongsByCountryQuery(country);
   console.log(country);
+  const divWidth = useRef();
+  useEffect(() => {
+    if(!isFetching && !error) {divWidth.current.scrollIntoView();}
+  });
   useEffect(() => {
     axios
       .get(
@@ -37,7 +42,7 @@ export default function AroundYou() {
   };
   return (
     <div className="flex flex-col">
-      <h2 className="font-bold text-white text-3xl mt-4 mb-10">Around You</h2>
+      <h2 className="font-bold text-white text-3xl mt-4 mb-10" ref={divWidth}>Around You</h2>
       <div className="sm:hidden md:hidden xs:hidden lg:flex flex-wrap sm:justify-start justify-center gap-8">
         {data?.map((song, i) => (
           <SongCard

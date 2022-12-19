@@ -19,7 +19,6 @@ const TopChartCard = ({
   handlePlayClick,
 }) => (
   <div className="flex flex-row items-center w-full hover:bg-rose-700 py-2 p-4 rounded-lg cursor-pointer mb-2">
-    <h3 className="text-white text-base font-bold mr-3">{i + 1}.</h3>
     <div className=" flex flex-row justify-between items-center">
       <img
         src={song?.images?.coverart || song.hub.image}
@@ -76,7 +75,7 @@ export default function TopPlay() {
         </div>
         <div className=" mt-4 flex flex-col gap-1">
           {topPlays?.slice(0, 5)?.map((song, i) => (
-            <TopChartCard
+            song.artists && <TopChartCard
               key={song.key}
               song={song}
               i={i}

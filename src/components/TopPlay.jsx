@@ -22,7 +22,7 @@ const TopChartCard = ({
     <h3 className="text-white text-base font-bold mr-3">{i + 1}.</h3>
     <div className=" flex flex-row justify-between items-center">
       <img
-        src={song?.images?.coverart}
+        src={song?.images?.coverart || song.hub.image}
         alt={song?.title}
         className="rounded-xl w-14"
       />
@@ -31,9 +31,9 @@ const TopChartCard = ({
       <Link to={`/songs/${song?.key}`}>
         <p className="text-white font-bold text-xl">{song?.title}</p>
       </Link>
-      <Link to={`/artists/${song?.artists[0].adamid}`}>
+      {song?.artists && <Link to={`/artists/${song?.artists[0].adamid}`}>
         <p className="text-gray-300 text-base mt-1">{song?.subtitle}</p>
-      </Link>
+      </Link>}
     </div>
     <PlayPause
       isPlaying={isPlaying}
@@ -49,8 +49,8 @@ export default function TopPlay() {
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const { data } = useGetTopChartsQuery();
   // console.log(data);
-  const divRef = useRef(null);
-  const topPlays = data?.slice(0, 10);
+
+  const topPlays = data?.slice(0,10);
   const handlePauseClick = () => {
     dispatch(playPause(false));
   };
@@ -59,13 +59,10 @@ export default function TopPlay() {
     dispatch(playPause(true));
   };
 
-  useEffect(() => {
-    divRef.current.scrollIntoView({ behavior: "smooth" });
-  });
-
+  console.log(topPlays)
   return (
     <div
-      ref={divRef}
+      
       className="xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 lg:max-w-[400px] max-w-full flex flex-col"
     >
       <div className="w-full flex flex-col">
@@ -108,19 +105,19 @@ export default function TopPlay() {
             modules={[FreeMode]}
             className="mt-2"
           >
-            {topPlays?.slice(0, 5)?.map((artist) => (
+            {topPlays?.map((artist) => (
               <SwiperSlide
                 key={artist?.key}
                 style={{ width: "25%", height: "auto" }}
                 className="shadow-lg rounded-full animate-slideright"
               >
-                <Link to={`/artists/${artist?.artists[0]?.adamid}`}>
+                { <Link to={artist?.artists && `/artists/${artist?.artists[0]?.adamid}`}>
                   <img
-                    src={artist?.images?.background}
+                    src={artist?.images?.background || artist?.hub?.image}
                     alt="Name"
-                    className="rounded-full w-full object-cover"
+                    className="rounded-full w-full object-cover object-center"
                   />
-                </Link>
+                </Link>}
               </SwiperSlide>
             ))}
           </Swiper>

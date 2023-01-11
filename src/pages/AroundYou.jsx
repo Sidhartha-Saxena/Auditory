@@ -8,7 +8,7 @@ import { playPause, setActiveSong } from "../redux/features/playerSlice";
 import { useRef } from "react";
 
 export default function AroundYou() {
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState("IN");
   const [loading, setLoading] = useState(true);
   const { activeSong, isPlaying } = useSelector((state) => state.player);
   const dispatch = useDispatch();

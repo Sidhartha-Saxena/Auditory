@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useRef } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 
@@ -17,16 +15,13 @@ import {
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
 
-
   return (
     <div className="relative flex">
       <Sidebar />
       <div className=" flex flex-col bg-[#000]">
         <Searchbar />
 
-        <div
-          className="px-3 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse lg:w-[calc(100vw-240px)]"
-        >
+        <div className="px-3 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse lg:w-[calc(100vw-240px)]">
           <div className="flex-1 h-fit ">
             <Routes>
               <Route path="/" element={<Discover />} />
